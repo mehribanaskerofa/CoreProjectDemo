@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.SqlServer.Abstract
 {
-    public interface IBlogDal: IGenericDal<Blog>
+    public interface ICommentDal: IGenericDal<Comment>
     {
+        List<Comment> GetListWithBlog();
     }
 }

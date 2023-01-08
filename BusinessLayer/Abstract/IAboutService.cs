@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.SqlServer.Abstract
+namespace BusinessLayer.Abstract
 {
-    public interface ICommentDal: IGenericDal<Comment>
+    public interface IAboutService : IGenericService<About>
     {
     }
 }
