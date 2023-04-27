@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
-    <Folder Include="ValidationRules\" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreLayer\CoreLayer.csproj" />
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\EntityLayer\EntityLayer.csproj" />
   </ItemGroup>
 
 </Project>

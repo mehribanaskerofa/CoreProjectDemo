@@ -1,0 +1,63 @@
+﻿@model Writer
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Register Now</h3>
+        <div class="inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                <form asp-action="Index" asp-controller="Register" method="post">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationDefault01">Full name</label>
+                            <input type="text" asp-for="WriterName" class="form-control" id="validationDefault01" placeholder="" required="">
+                            <span asp-validation-for="WriterName"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationDefault02" >E-mail</label>
+                            <input type="text" asp-for="WriterMail" class="form-control" id="validationDefault02" placeholder="" required="">
+                            <span asp-validation-for="WriterMail"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="password1" >Password</label>
+                            <input type="password" asp-for="WriterPassword" class="form-control" id="password1" placeholder="" required="">
+                            <span asp-validation-for="WriterPassword"></span>
+                        </div>
+                        @*<div class="form-group col-md-6">
+                            <label for="password2">Confirm Password</label>
+                            <input type="password" class="form-control" asp-for="WriterPassword" id="password2" placeholder="" required="">
+                            <span asp-validation-for="PasswordAgain"></span>
+                        </div>*@
+
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4">Register</button>
+                    <p>
+                        <a href="#" id="btn1">By clicking Signup, I agree to your terms</a>
+                    </p>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $('#btn1').click(function () {
+        swal("Site Acceptance Conditions", "Information and news e-mails will continue to be sent through the e-mail address you provide on our site, without reaching the spam level. If you want to unsubscribe from the e-mail newsletter, you can stop the e-mail thread, your passwords and e-mail addresses are stored in our databases in an encrypted format so that no user can see them.");
+    });
+</script>
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+

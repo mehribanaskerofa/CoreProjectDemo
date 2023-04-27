@@ -1,0 +1,36 @@
+﻿@model List<Notification>
+@{
+    ViewData["Title"] = "AllNotification";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+    string duration = "";
+    DateTime now = DateTime.Now;
+}
+<h1>Notifications</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Notification statement</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            TimeSpan zaman = now.Subtract(item.NotificationDate);
+            if (zaman.Days == 0)
+            {
+                duration = "Today";
+            }
+            else
+            {
+                duration = new DateTime(zaman.Ticks).ToString("d 'days ago added.'");
+            }
+            <tr>
+                <td>@item.NotificationID</td>
+                <td>@item.NotificationDetails</td>
+                <td>@duration</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model EntityLayer.Concrete.Category
+
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Category Adding Page</h1>
+<br />
+
+@*@using (Html.BeginRouteForm(
+   routeName:"AddCategory",
+   routeValues: new { action="AddCategory",controller= "Category" , area="Admin"}, method: FormMethod.Post))*@
+
+@using (Html.BeginForm("AddCategory", "Category", new { area = "Admin" }, FormMethod.Post))
+{
+    @Html.Label("Please Enter Category Name!")
+    @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.CategoryName, "", new { @class = "text-success" })
+    <br />
+    <br />
+    @Html.Label("Please Enter Category Description!")
+    @Html.TextAreaFor(x => x.CategoryDescription, 15, 3, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.CategoryDescription, "", new { @class = "text-success" })
+    <br />
+    <br />
+    <button class="btn btn-info">Save</button>
+}

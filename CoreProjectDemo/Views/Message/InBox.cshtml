@@ -1,0 +1,40 @@
+﻿@model List<Message2>
+@{
+    ViewData["Title"] = "InBox";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Message inBox</h1>
+<br />
+<table class="table table-hover">
+    <tr>
+        <th>#</th>
+        <th>Subject</th>
+        <th>Sender</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Open</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.MessageID</th>
+            <td>@item.Subject</td>
+            <td>@item.SenderUser.WriterName</td>
+            <td> @(((DateTime)item.MessageDate).ToString("dd MMMM yyyy"))</td>
+            <td>
+                @if (item.MessageStatus)
+                {
+                    <span class="badge badge-info">Message read!</span>
+                }
+                else
+                {
+                    <span class="badge badge-success">Message dont read!</span>
+                }
+            </td>
+            <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-warning">Open</a></td>
+        </tr>
+    }
+</table>
+<br />
+<a href="/Message/SendMessage/" class="btn btn-primary">Create new message</a>
