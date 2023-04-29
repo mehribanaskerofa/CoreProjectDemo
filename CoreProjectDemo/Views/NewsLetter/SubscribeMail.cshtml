@@ -2,7 +2,7 @@
     <p>Technology, Software and other blogs...</p>
     <form id="subForm" method="post">
         <input type="email" placeholder="Enter Your Email Address!" name="Mail" required="">
-        <input type="submit" id="btn" name="submit" value="Abone Ol">
+        <input type="submit" id="btn" name="submit" value="Subscribe">
         <br />
         <div id="result"></div><br />
     </form>
@@ -10,18 +10,18 @@
 <script type="text/javascript">
     $(function () {
         $("#btn").click(function (e) {
-            var bolum = document.createElement("div");
-            bolum.className = "alert alert-success";
-            bolum.innerHTML = "Registration Successfull";
-            document.body.appendChild(bolum);
+            var result = document.createElement("div");
+            result.className = "alert alert-success";
+            result.innerHTML = "Registration Successfull";
+            document.body.appendChild(result);
             e.preventDefault();
-            var veri = $("#subForm").serialize();
+            var data = $("#subForm").serialize();
             $.ajax({
                 type: "post",
                 url: "/NewsLetter/SubscribeMail/",
-                data: veri,
+                data: data,
                 success: function (f) {
-                    $("#result").html(bolum);
+                    $("#result").html(result);
                     setTimeout(() => { window.location.reload() }, 7500);
                 }
             });

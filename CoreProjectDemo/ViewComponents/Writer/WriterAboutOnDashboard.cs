@@ -17,13 +17,12 @@ namespace CoreProjectDemo.ViewComponents.Writer
 
         public IViewComponentResult Invoke()
         {
-            //var username = User.Identity.Name;
-            //ViewBag.veri = username;
-            //var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-            //var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-            //var values = writerManager.GetWriterById(writerID);
-            //return View(values);
-            return View();
+            var username = User.Identity.Name;
+            ViewBag.veri = username;
+            var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            var values = writerManager.GetWriterById(writerID);
+            return View(values);
         }
     }
 }

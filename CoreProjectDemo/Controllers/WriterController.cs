@@ -4,6 +4,7 @@ using DataAccessLayer.SqlServer.Context;
 using DataAccessLayer.SqlServer.Repositories;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,11 @@ namespace CoreProjectDemo.Controllers
     {
         WriterManager writerManager = new WriterManager(new EFWriterRepository());
         //UserManager userManager = new UserManager(new EfUserRepository());
-        //private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public WriterController()//UserManager<AppUser> userManager)
+        public WriterController(UserManager<AppUser> userManager)
         {
-            // _userManager = userManager;
+             _userManager = userManager;
         }
 
         SqlServerContext c = new SqlServerContext();
@@ -50,53 +51,55 @@ namespace CoreProjectDemo.Controllers
         {
             return PartialView();
         }
-        // [HttpGet]
-        //public async Task<IActionResult> WriterEditProfile()
-        //{//71 view
-        //    //var username = User.Identity.Name;
-        //    //var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-        //    //var id = c.Users.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
-        //    //var values = userManager.TGetById(id);
-        //    var values = await _userManager.FindByNameAsync(User.Identity.Name);
-        //    UserUpdateViewModel model = new UserUpdateViewModel();
-        //    model.mail = values.Email;
-        //    model.namesurname = values.NameSurname;
-        //    model.username = values.UserName;
-        //    model.imageurl = values.ImageUrl;
-        //    return View(model);
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> WriterEditProfile(string PasswordAgain, UserUpdateViewModel model)
-        //{
-        //    var values = await _userManager.FindByNameAsync(User.Identity.Name);
-        //    values.NameSurname = model.namesurname;
-        //    values.ImageUrl = model.imageurl;
-        //    values.Email = model.mail;
-        //    values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, model.password);
-        //    var result = await _userManager.UpdateAsync(values);
-        //    return RedirectToAction("Index", "Dashboard");
+        [HttpGet]
+        public async Task<IActionResult> WriterEditProfile()
+        {// example
+            //var username = User.Identity.Name;
+            //var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            //var id = c.Users.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
+            //var values = userManager.TGetById(id);
+
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateViewModel model = new UserUpdateViewModel();
+            model.mail = values.Email;
+            model.namesurname = values.NameSurname;
+            model.username = values.UserName;
+            model.imageurl = values.ImageUrl;
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> WriterEditProfile(string PasswordAgain, UserUpdateViewModel model)
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.NameSurname = model.namesurname;
+            values.ImageUrl = model.imageurl;
+            values.Email = model.mail;
+            values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, model.password);
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "Dashboard");
 
 
-        //    //UserValidator ul = new UserValidator();
-        //    //ValidationResult results = ul.Validate(appuser);
-        //    //if (results.IsValid && appuser.PasswordHash == PasswordAgain)
-        //    //{
-        //    //    userManager.TUpdate(appuser);
-        //    //    return RedirectToAction("Index", "Dashboard");
-        //    //}
-        //    //else if (!results.IsValid)
-        //    //{
-        //    //    foreach (var item in results.Errors)
-        //    //    {
-        //    //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-        //    //    }
-        //    //}
-        //    //else
-        //    //{
-        //    //    ModelState.AddModelError("WriterPassword", "Girdiğiniz Şifreler Eşleşmiyor! Lütfen Tekrar Deneyiniz");
-        //    //}
-        //    //return View();
-        //}
+            //example
+            //UserValidator ul = new UserValidator();
+            //ValidationResult results = ul.Validate(appuser);
+            //if (results.IsValid && appuser.PasswordHash == PasswordAgain)
+            //{
+            //    userManager.TUpdate(appuser);
+            //    return RedirectToAction("Index", "Dashboard");
+            //}
+            //else if (!results.IsValid)
+            //{
+            //    foreach (var item in results.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("WriterPassword", "Girdiğiniz Şifreler Eşleşmiyor! Lütfen Tekrar Deneyiniz");
+            //}
+            //return View();
+        }
         [HttpGet]
         public IActionResult WriterAdd()
         {

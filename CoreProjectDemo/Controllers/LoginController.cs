@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreProjectDemo.Models;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,45 +11,45 @@ namespace CoreProjectDemo.Controllers
 {
     public class LoginController : Controller
     {
-        //private readonly SignInManager<AppUser> _signInManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        //public LoginController(SignInManager<AppUser> signInManager)
-        //{
-        //    _signInManager = signInManager;
-        //}
+        public LoginController(SignInManager<AppUser> signInManager)
+        {
+            _signInManager = signInManager;
+        }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Index(UserSignInViewModel p)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index", "Dashboard");
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("Index", "Login");
-        //        }
-        //    }
-        //    return View();
-        //}
-        //public async Task<IActionResult> LogOut()
-        //{
-        //    await _signInManager.SignOutAsync();
-        //    return RedirectToAction("Index", "Login");
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Index(UserSignInViewModel p)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Login");
+                }
+            }
+            return View();
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
+        }
 
-        //public IActionResult AccessDenied()
-        //{
-        //    return View();
-        //}
+        public IActionResult AccessDenied()
+        {
+        return View();
+        }
     }
 }
 

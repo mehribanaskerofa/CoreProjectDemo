@@ -17,12 +17,12 @@ namespace CoreProjectDemo.Controllers
 
         public IActionResult Index()
         {
-            //var username = User.Identity.Name;
-            //var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-            //var writerid = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-            //ViewBag.BlogCount = blogManager.GetList(x => x.BlogStatus == true).Count();
-            //ViewBag.OurBlogCount = context.Blogs.Where(x => x.WriterID == writerid).Count();
-            //ViewBag.CategoryCount = categoryManager.GetList().Count();
+            var username = User.Identity.Name;
+            var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerid = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            ViewBag.BlogCount = blogManager.GetList(x => x.BlogStatus == true).Count();
+            ViewBag.OurBlogCount = context.Blogs.Where(x => x.WriterID == writerid).Count();
+            ViewBag.CategoryCount = categoryManager.GetList().Count();
             return View();
         }
     }
