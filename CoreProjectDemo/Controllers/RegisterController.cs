@@ -3,6 +3,7 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.SqlServer.Repositories;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace CoreProjectDemo.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         WriterManager writerManager = new WriterManager(new EFWriterRepository());

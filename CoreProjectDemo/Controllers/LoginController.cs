@@ -1,5 +1,6 @@
 ﻿using CoreProjectDemo.Models;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,13 +10,17 @@ using System.Threading.Tasks;
 
 namespace CoreProjectDemo.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public LoginController(SignInManager<AppUser> signInManager)
+
+        public LoginController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -26,6 +31,14 @@ namespace CoreProjectDemo.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UserSignInViewModel p)
         {
+            AppUser user = new AppUser()
+            {
+                UserName=p.username
+            };
+            var resul = await _userManager.CreateAsync(user, p.password);
+
+
+            //var a=_userManager.PasswordHasher.HashPassword(null,p.password);
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);

@@ -39,13 +39,13 @@
                                     <a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
                                 </h5>
                                 <p class="card-text mb-3">
-                                    @((string)item.BlogContent.Substring(0, item.BlogContent.Substring(0, 130).LastIndexOf(" ")))...
+                                   
 
 
 
 
                                     @*Ternary operator*@
-                                    @*@(item.BlogContent.Length>130? item.BlogContent.Substring(0, item.BlogContent.Substring(0, 130).LastIndexOf(" "))+"..." : item.BlogContent+"...")*@
+                                    @(item.BlogContent.Length>130? item.BlogContent.Substring(0, item.BlogContent.Substring(0, 130).LastIndexOf(" "))+"..." : item.BlogContent+"...")
 
                                 </p>
                                 <a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-primary read-m">Read more...</a>

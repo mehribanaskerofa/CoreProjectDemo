@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.SqlServer.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CoreProjectDemo.Controllers
 {
+    [AllowAnonymous]
     public class AboutController : Controller
     {
         AboutManager  aboutManager = new AboutManager(new EFAboutRepository());

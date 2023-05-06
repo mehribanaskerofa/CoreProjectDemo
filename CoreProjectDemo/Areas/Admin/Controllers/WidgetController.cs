@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreProjectDemo.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class WidgetController : Controller
     {
         public IActionResult Index()

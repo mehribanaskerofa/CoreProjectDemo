@@ -73,7 +73,7 @@ namespace CoreProjectDemo.Areas.Admin.Controllers
                     workbook.SaveAs(stream);
                     var content = stream.ToArray();
                     var fileName ="calisma_"+ Guid.NewGuid().ToString().Replace("-", "")+DateTime.Now.Ticks.ToString();
-                    return File(content, "", fileName+".xlsx");
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName+".xlsx");
                 }
             }
         }

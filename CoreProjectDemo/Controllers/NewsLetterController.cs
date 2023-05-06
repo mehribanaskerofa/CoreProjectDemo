@@ -27,5 +27,17 @@ namespace CoreProjectDemo.Controllers
             newsletterManager.TAdd(newsLetter);
             return PartialView();
         }
+        [HttpGet]
+        public PartialViewResult SubscribeFooterMail()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public IActionResult SubscribeFooterMail(NewsLetter newsLetter)
+        {
+            newsLetter.MailStatus = true;
+            newsletterManager.TAdd(newsLetter);
+            return PartialView();
+        }
     }
 }

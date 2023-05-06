@@ -1,4 +1,4 @@
-﻿@model Writer
+﻿@model EntityLayer.Concrete.Writer
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/UserLayout.cshtml";
@@ -7,57 +7,70 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 
-
 <section class="main-content-w3layouts-agileits">
     <div class="container">
-        <h3 class="tittle">Register Now</h3>
+        <h3 class="tittle">Yazar Kayıt Sayfası!</h3>
         <div class="inner-sec">
             <div class="login p-5 bg-light mx-auto mw-100">
-                <form asp-action="Index" asp-controller="Register" method="post">
+                @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+                {
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="validationDefault01">Full name</label>
-                            <input type="text" asp-for="WriterName" class="form-control" id="validationDefault01" placeholder="" required="">
-                            <span asp-validation-for="WriterName"></span>
+                            <label for="validationCustom01">Adınız ve Soyadınız!</label>
+
+                            @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control", @id = "ValidationDefault01", @placeholder = "Lütfen Adınızı Giriniz!", @required = "" })
+                            @Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-success" })
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="validationDefault02" >E-mail</label>
-                            <input type="text" asp-for="WriterMail" class="form-control" id="validationDefault02" placeholder="" required="">
-                            <span asp-validation-for="WriterMail"></span>
+                            <label for="validationCustom02">Mail Adresiniz!</label>
+                            @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control", @id = "ValidationDefault02", @placeholder = "Lütfen Mail Adresinizi Giriniz!", @required = "" })
+                            @Html.ValidationMessageFor(x => x.WriterMail, "", new { @class = "text-info" })
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="password1" >Password</label>
-                            <input type="password" asp-for="WriterPassword" class="form-control" id="password1" placeholder="" required="">
-                            <span asp-validation-for="WriterPassword"></span>
+                            <label for="exampleInputPassword1 mb-2">Şifreniz!</label>
+                            @Html.PasswordFor(x => x.WriterPassword, new { @class = "form-control", @id = "password1", @placeholder = "Lütfen Şifrenizi Giriniz!", @required = "" })
+                            @Html.ValidationMessageFor(x => x.WriterPassword, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword2 mb-2">Parolanızı Tekrar Giriniz</label>
+                            <input type="password" name="PasswordAgain" class="form-control" id="password2" placeholder="Şifrenizi Tekrar Giriniz" required="" />
                         </div>
                         @*<div class="form-group col-md-6">
-                            <label for="password2">Confirm Password</label>
-                            <input type="password" class="form-control" asp-for="WriterPassword" id="password2" placeholder="" required="">
-                            <span asp-validation-for="PasswordAgain"></span>
-                        </div>*@
-
+                                <label for="exampleInputPassword2 mb-2">Şifre Tekrar!</label>
+                                <input type="password" class="form-control" id="password2" name="WriterPassword" placeholder="" required="">
+                            </div>*@
                     </div>
-                    <button type="submit" class="btn btn-primary submit mb-4">Register</button>
-                    <p>
-                        <a href="#" id="btn1">By clicking Signup, I agree to your terms</a>
-                    </p>
-                </form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword2 mb-2">Görsel Dosya Yolu</label>
 
+                            @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control", @id = "ValidationDefault03", @placeholder = "Lütfen Dosya Yolunu Giriniz!", @required = "" })
+                            @Html.ValidationMessageFor(x => x.WriterImage, "", new { @class = "text-warning" })
+                        </div>
+                        @*<div class="form-group col-md-6">
+                                <label for="exampleInputPassword2 mb-2">Şehir</label>
+                                @Html.DropDownList("cities", (ViewBag.Cities), "Şehir Seçiniz", new { @class = "form-control dropdown" })
+                            </div>*@
+                    </div>
+                    @*<div class="col-md-6">
+                            <label for="validationCustom01">Görsel Dosya Yolunuz!</label>
+                            @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.WriterImage, "", new { @class = "text-warning" })
+                        </div>*@
+                    <button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
+                    <p>
+                        <a href="#" id="btn1">Tüm şartları okudum, kabul ediyorum.</a>
+                    </p>
+                }
             </div>
         </div>
     </div>
+    <br />
+    <script>
+        $('#btn1').click(function () {
+            swal("Site Kabul Şartları", "Sitemizde verdiğiniz mail adresi üzerinden bilgi ve haber e-postaları spam ölçüsüne varmadan gönderilmeye devam edilecektir. Eğer e-posta bülteninden çıkmak iterseniz mail ileti dizisini durdurabilirsiniz, şifre ve mail adresleriniz şifrelenmiş formatta herhangi bir kullanıcının görmeyeceği şekilde veri tabanlarımızda saklanmaktadır.");
+        });
+    </script>
 </section>
-
-<script>
-    $('#btn1').click(function () {
-        swal("Site Acceptance Conditions", "Information and news e-mails will continue to be sent through the e-mail address you provide on our site, without reaching the spam level. If you want to unsubscribe from the e-mail newsletter, you can stop the e-mail thread, your passwords and e-mail addresses are stored in our databases in an encrypted format so that no user can see them.");
-    });
-</script>
-@section scripts{
-
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
-

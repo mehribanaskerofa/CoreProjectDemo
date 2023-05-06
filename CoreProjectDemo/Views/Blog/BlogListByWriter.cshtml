@@ -1,0 +1,54 @@
+﻿@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>BlogListByWriter</h1>
+
+
+
+@*@{
+        string color = "";
+        string statusColor = "";
+        string durummm = "";
+        string checkStatus = "";
+        string buttonStatusColor = "";
+    }*@
+
+<h1>@ViewBag.v</h1>
+<br />
+<table class="table table-hover">
+    <tr>
+        <th>#</th>
+        <th>Blog Title</th>
+        <th>Created date</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.BlogID</th>
+            <td>@item.BlogTitle</td>
+            <td> @(((DateTime)item.BlogCreateDate).ToString("dd MMMM yyyy"))</td>
+            <td>@item.Category.CategoryName</td>
+            <td>
+                @if (item.BlogStatus)
+                {
+                    <span class="badge badge-info">Blog Active</span>
+                }
+                else
+                {
+                    <span class="badge badge-success">Blog Passive</span>
+                }
+            </td>
+            <td>@Html.ActionLink("Sil", "DeleteBlog", new { id = item.BlogID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstediğinize Eminmisiniz?')" })</td>
+            <td><a href="/Blog/EditBlog/@item.BlogID" class="btn btn-warning">Edit</a></td>
+        </tr>
+    }
+</table>
+<br />
+<a href="/Blog/BlogAdd/" class="btn btn-primary">Add new </a>
