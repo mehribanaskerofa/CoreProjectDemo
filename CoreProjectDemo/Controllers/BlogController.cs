@@ -5,10 +5,12 @@ using DataAccessLayer.SqlServer.Repositories;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -62,7 +64,7 @@ namespace CoreProjectDemo.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult BlogAdd(Blog blog)
+        public IActionResult BlogAdd(Blog blog, IFormFile image)
         {
             var username = User.Identity.Name;
             var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
@@ -70,6 +72,18 @@ namespace CoreProjectDemo.Controllers
 
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(blog);
+            //if (image != null)
+            //{
+            //    var extension = Path.GetExtension(image.FileName);
+            //    var newimagename = Guid.NewGuid() + extension;
+            //    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newimagename);
+            //    var stream = new FileStream(location, FileMode.Create);
+            //    image.CopyTo(stream);
+            //    blog.BlogImage = newimagename;
+            //    blog.BlogThumbnailImage = newimagename;
+            //}
+            blog.BlogImage = "f7ef54a1-5bf5-4e5a-98ed-15ad4fec47a3.png";
+            blog.BlogThumbnailImage = "f7ef54a1-5bf5-4e5a-98ed-15ad4fec47a3.png";
             if (results.IsValid)
             {
                 blog.BlogStatus = true;

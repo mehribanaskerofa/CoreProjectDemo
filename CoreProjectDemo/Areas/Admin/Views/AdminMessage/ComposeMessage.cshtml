@@ -1,4 +1,4 @@
-﻿@*@model EntityLayer.Concrete.Message2
+﻿@model EntityLayer.Concrete.Message2
     @{
         ViewData["Title"] = "ComposeMessage";
         Layout = "~/Views/Shared/AdminLayout.cshtml";
@@ -17,13 +17,13 @@
                                 <div class="space-25"></div>
                                 <h5>Klasörler</h5>
                                 <ul class="folder-list m-b-md" style="padding: 0">
-                                    <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">16</span> </a></li>
-                                    <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-envelope-o"></i> Giden Mesajlar</a></li>
-                                    <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Önemli Mesajlar</a></li>
+                                    <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Inbox<span class="label label-warning float-right">16</span> </a></li>
+                                    <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-envelope-o"></i> SendBox</a></li>
+                                    <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Email</a></li>
                                     <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-danger float-right">2</span></a></li>
-                                    <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
+                                    <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Bin</a></li>
                                 </ul>
-                                <h5>Kategoriler</h5>
+                                @*<h5>Kategoriler</h5>
                                 <ul class="category-list" style="padding: 0">
                                     <li><a href="#"> <i class="fa fa-circle text-navy"></i> İş </a></li>
                                     <li><a href="#"> <i class="fa fa-circle text-danger"></i> Dokümanlar</a></li>
@@ -31,7 +31,7 @@
                                     <li><a href="#"> <i class="fa fa-circle text-info"></i> Tanıtımlar</a></li>
                                     <li><a href="#"> <i class="fa fa-circle text-warning"></i> Talepler</a></li>
                                 </ul>
-                                <div class="clearfix"></div>
+                                <div class="clearfix"></div>*@
                             </div>
                         </div>
                     </div>
@@ -39,11 +39,11 @@
                 <div class="col-lg-9 animated fadeInRight">
                     <div class="mail-box-header">
                         <div class="float-right tooltip-demo">
-                            <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Taslaklar klasörüne taşı"><i class="fa fa-pencil"></i> Taslak</a>
-                            <a href="mailbox.html" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="İptal Et"><i class="fa fa-times"></i> İptal Et</a>
+                            <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Taslaklar klasörüne taşı"><i class="fa fa-pencil"></i>Draft</a>
+                            <a href="mailbox.html" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="İptal Et"><i class="fa fa-times"></i> Ignore</a>
                         </div>
                         <h2>
-                            Yeni Mesaj Oluştur
+                            Create New Message
                         </h2>
                     </div>
                     <div class="mail-box">
@@ -67,31 +67,13 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="mail-body text-right tooltip-demo">
-                        <a asp-action="ComposeMessage" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Gönder"><i class="fa fa-reply"></i> Gönder</a>
+                        <a asp-action="ComposeMessage" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> Send</a>
                         <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Vazgeç"><i class="fa fa-times"></i> Vazgeç</a>
-                        <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Taslaklara kaydet"><i class="fa fa-pencil"></i> Taslak</a>
+                        <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="save"><i class="fa fa-pencil"></i> Draft</a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </body>
-    </html>*@
-@using EntityLayer.Concrete
-@model Tuple<Message2, AppUser>
-.......
-<form method="post">
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Alıcı:</label>
-        <div class="col-sm-10"><input type="text" class="form-control" name="Item2.Email"></div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Konu:</label>
-        <div class="col-sm-10"><input type="text" class="form-control" name="Item1.Subject" /></div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Mesajınız:</label>
-        <textarea class="form-control" name="Item1.MessageDetails" rows="4" cols="10"></textarea>
-    </div>
-    <button type="submit">Gönder</button>
-</form>
+    </html>

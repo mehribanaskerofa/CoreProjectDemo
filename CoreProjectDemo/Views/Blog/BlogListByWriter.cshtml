@@ -45,7 +45,7 @@
                     <span class="badge badge-success">Blog Passive</span>
                 }
             </td>
-            <td>@Html.ActionLink("Sil", "DeleteBlog", new { id = item.BlogID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstediğinize Eminmisiniz?')" })</td>
+            <td>@Html.ActionLink("delete", "DeleteBlog", new { id = item.BlogID }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you want to delete?')" })</td>
             <td><a href="/Blog/EditBlog/@item.BlogID" class="btn btn-warning">Edit</a></td>
         </tr>
     }

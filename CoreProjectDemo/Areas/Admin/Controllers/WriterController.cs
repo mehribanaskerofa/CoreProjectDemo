@@ -58,17 +58,17 @@ namespace CoreProjectDemo.Areas.Admin.Controllers
             new WriterClass
             {
                 Id=1,
-                Name="Ayşe"
+                Name="Mehriban"
             },
             new WriterClass
             {
                 Id=2,
-                Name="Ahmet"
+                Name="Nigar"
             },
             new WriterClass
             {
                 Id=3,
-                Name="Buse"
+                Name="Zeyneb"
             }
         };
     }

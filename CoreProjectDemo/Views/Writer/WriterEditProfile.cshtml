@@ -11,11 +11,11 @@
         <div class="card-body">
             <h4 class="card-title">Editing Author Profile Information</h4>
             <br />
-            <form class="forms-sample" method="post">
-                <div class="form-group">
+            <form class="forms-sample" method="post" asp-controller="Writer" asp-action="WriterEditProfile">
+                @*<div class="form-group">
                     <label for="exampleInputName1">Your name!</label>
                     <input type="text" asp-for="@Model.namesurname" class="form-control" />
-                </div>
+                </div>*@
                 <div class="form-group">
                     <label for="exampleInputName2">Username!</label>
                     <input type="text" asp-for="@Model.username" class="form-control" />
@@ -28,10 +28,10 @@
                     <label for="exampleInputEmail3">Password</label>
                     <input type="password" asp-for="@Model.password" class="form-control" />
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <label for="exampleInputEmail3">Image</label>
                     <input type="text" asp-for="@Model.imageurl" class="form-control" />
-                </div>
+                </div>*@
                 <button type="submit" class="btn btn-gradient-primary mr-2">edit</button>
                 <button class="btn btn-light">cancel</button>
             </form>

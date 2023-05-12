@@ -23,6 +23,7 @@ namespace CoreProjectDemo.Controllers
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             var values = messageManager.GetInboxListByWriter(writerID);
+
             if (values.Count() > 3)
             {
                 values = values.TakeLast(3).ToList();
@@ -44,9 +45,17 @@ namespace CoreProjectDemo.Controllers
 
         }
 
+        [HttpGet]
         public IActionResult MessageDetails(int id)
         {
             var value = messageManager.TGetById(id);
+            return View(value);
+        }
+        [HttpPost]
+        public IActionResult MessageDetail(int id)
+        {
+            var value = messageManager.TGetById(id);
+            value.MessageStatus = false;
             return View(value);
         }
 

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h1>Yazar Ajax İşlemleri</h1>
+<h1>Writer Ajax Transactions</h1>
 <br />
 <button type="button" id="btngetlist" class="btn btn-outline-primary">Yazar Listesi</button>
 <button type="button" id="btngetbyid" class="btn btn-outline-success">Yazar Getir</button>
@@ -14,7 +14,7 @@
 <br />
 <br />
 <div id="writerlist">
-    Buraya yazarlar gelecek
+  Writer
 </div>
 <br />
 <div id="writerget">
@@ -22,23 +22,23 @@
 </div>
 <br />
 <div>
-    <input type="text" id="writerid" placeholder="Yazar ID Değerini Giriniz!" class="form-control" />
+    <input type="text" id="writerid" placeholder="Enter Writer ID Value!" class="form-control" />
 </div>
 <br />
 <div>
-    <input type="text" class="form-control" id="txtwriterid" placeholder="Yazar ID" />
+    <input type="text" class="form-control" id="txtwriterid" placeholder="Writer ID" />
     <br />
-    <input type="text" class="form-control" id="txtwritername" placeholder="Yazar Adı" />
+    <input type="text" class="form-control" id="txtwritername" placeholder="Writer name" />
 </div>
 <br />
 <div>
-    <input type="text" class="form-control" id="txtid" placeholder=" Silinecek Yazar ID" />
+    <input type="text" class="form-control" id="txtid" placeholder=" Writer ID to be deleted" />
 </div>
 <br />
 <div>
-    <input type="text" id="txtid1" class="form-control" placeholder="Güncellenecek ID" />
+    <input type="text" id="txtid1" class="form-control" placeholder="To be updated ID" />
     <br />
-    <input type="text" id="txtwritername1" class="form-control" placeholder="Güncellenecek İsim" />
+    <input type="text" id="txtwritername1" class="form-control" placeholder="Name to Update" />
 </div>
 <br />
 
@@ -55,7 +55,7 @@
                 success: function (func) {
                     let w = jQuery.parseJSON(func);
                     console.log(w);
-                    let tablehtml = "<table class=table table-bordered> <tr><th> Yazar ID</th> <th> Yazar Adı </th>  </tr>";
+                    let tablehtml = "<table class=table table-bordered> <tr><th> Writer ID</th> <th> Writer name </th>  </tr>";
                     $.each(w, (index, value) => {
                         tablehtml += `<tr><td>${value.Id}</td> <td>${value.Name}</td></tr>`
                     });
@@ -75,7 +75,7 @@
                 success: function (func) {
                     let w = jQuery.parseJSON(func);
                     console.log(w);
-                    let getvalue = `<table class=table table-bordered> <tr><th>Yazar ID</th> <th>Yazar Adı</th></tr> <tr><td>${w.Id}</td><td>${w.Name}</td></tr></table>`;
+                    let getvalue = `<table class=table table-bordered> <tr><th>Writer ID</th> <th>Yazar Adı</th></tr> <tr><td>${w.Id}</td><td>${w.Name}</td></tr></table>`;
                     $("#writerget").html(getvalue);
                 }
             });
@@ -91,7 +91,7 @@
                 data: writer,
                 success: function (func) {
                     let result = jQuery.parseJSON(func);
-                    alert("Yazar Ekleme İşlemi Başarılı Bir Şekilde Gerçekleşti!");
+                    alert("Adding Writer Successfully!");
                 }
             });
         });
@@ -102,7 +102,7 @@
                 type: "post",
                 dataType: "json",
                 success: function (func) {
-                    alert("Yazar Silme İşlemi Başarılı Bir Şekilde Gerçekleşti!");
+                    alert("Writer Deletion Successfully Performed!");
                 }
             });
         });
@@ -116,7 +116,7 @@
                 url: "/Admin/Writer/UpdateWriter/",
                 data: writer,
                 success: function (funk) {
-                    alert("Güncelleme Yapıldı.");
+                    alert("Updated.");
                 }
             });
         });

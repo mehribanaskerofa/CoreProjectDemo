@@ -15,22 +15,24 @@
                 <!--left-->
                 <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
                     <div class="blog-grid-top">
-
-                        <div class="blog_info_left_grid">
-                            <a href="single.html">
-                                <img src="~/web/images/b5.jpg" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                        <h3>
-                            Who We Are & Our Mission & Vision
-                        </h3>
                         @foreach (var item in Model)
                         {
+                            <div class="blog_info_left_grid">
+                                <a href="single.html">
+                                    <img src="~/web/images/b5.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <h3>
+                                Who We Are & Our Mission & Vision
+                            </h3>
+                            <p>
+                                @item.AboutDetails2
+                            </p>
                             <p>
                                 @item.AboutDetails1
                             </p>
                         }
-                        <a href="single.html" class="btn btn-primary read-m">Read more</a>
+                        @*<a href="single.html" class="btn btn-primary read-m">Read more</a>*@
                     </div>
                 </div>
                 <!--//left-->

@@ -71,8 +71,8 @@ namespace CoreProjectDemo.Controllers
         public async Task<IActionResult> WriterEditProfile(string PasswordAgain, UserUpdateViewModel model)
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            values.NameSurname = model.namesurname;
-            values.ImageUrl = model.imageurl;
+            values.NameSurname = model.mail;
+            values.ImageUrl = model.imageurl ?? "";
             values.Email = model.mail;
             values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, model.password);
             var result = await _userManager.UpdateAsync(values);
@@ -124,7 +124,7 @@ namespace CoreProjectDemo.Controllers
             w.WriterStatus = true;
             w.WriterAbout = p.WriterAbout;
             writerManager.TAdd(w);
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("writeradd", "writer");
         }
     }
 }

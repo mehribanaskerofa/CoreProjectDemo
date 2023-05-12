@@ -5,14 +5,17 @@
 }
 
 <h1>Message details</h1>
-<br/>
-@Html.Label("Message ID")
-@Html.TextBoxFor(x => x.MessageID, new { @class = "form-control", disabled = "disabled" })
-<br/>
-@Html.Label("Message Head")
-@Html.TextBoxFor(x => x.Subject, new { @class = "form-control", disabled = "disabled" })
-<br/>
-@Html.Label("Message Content")
-@Html.TextAreaFor(x => x.MessageDetails, 20, 3, new { @class = "form-control", disabled = "disabled" })
-<br/>
-<button class="btn btn-success">Mark as read</button>
+<br />
+@using (Html.BeginForm("MessageDetail", "Message", FormMethod.Post))
+{
+    @Html.Label("Message ID")
+    @Html.TextBoxFor(x => x.MessageID, new { @class = "form-control", disabled = "disabled" })
+    <br />
+    @Html.Label("Message Head")
+    @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", disabled = "disabled" })
+    <br />
+    @Html.Label("Message Content")
+    @Html.TextAreaFor(x => x.MessageDetails, 20, 3, new { @class = "form-control", disabled = "disabled" })
+    <br />
+    <button class="btn btn-success">Mark as read</button>
+}

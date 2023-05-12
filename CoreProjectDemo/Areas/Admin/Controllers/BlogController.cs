@@ -31,7 +31,7 @@ namespace CoreProjectDemo.Areas.Admin.Controllers
                 {
                     workbook.SaveAs(stream);
                     var content = stream.ToArray();
-                    return File(content, "", "Calisma1.xlsx");
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Calisma1.xlsx");
                 }
             }
         }

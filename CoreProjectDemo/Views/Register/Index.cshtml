@@ -9,33 +9,33 @@
 
 <section class="main-content-w3layouts-agileits">
     <div class="container">
-        <h3 class="tittle">Yazar Kayıt Sayfası!</h3>
+        <h3 class="tittle">Writer Registration Page!</h3>
         <div class="inner-sec">
             <div class="login p-5 bg-light mx-auto mw-100">
                 @using (Html.BeginForm("Index", "Register", FormMethod.Post))
                 {
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Adınız ve Soyadınız!</label>
+                            <label for="validationCustom01">Name and Surname!</label>
 
-                            @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control", @id = "ValidationDefault01", @placeholder = "Lütfen Adınızı Giriniz!", @required = "" })
+                            @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control", @id = "ValidationDefault01", @placeholder = "Please Enter Your Name!", @required = "" })
                             @Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-success" })
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="validationCustom02">Mail Adresiniz!</label>
-                            @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control", @id = "ValidationDefault02", @placeholder = "Lütfen Mail Adresinizi Giriniz!", @required = "" })
+                            <label for="validationCustom02">Your Email Address!</label>
+                            @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control", @id = "ValidationDefault02", @placeholder = "Please Enter Your Email Address!", @required = "" })
                             @Html.ValidationMessageFor(x => x.WriterMail, "", new { @class = "text-info" })
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="exampleInputPassword1 mb-2">Şifreniz!</label>
-                            @Html.PasswordFor(x => x.WriterPassword, new { @class = "form-control", @id = "password1", @placeholder = "Lütfen Şifrenizi Giriniz!", @required = "" })
+                            <label for="exampleInputPassword1 mb-2">Your password!</label>
+                            @Html.PasswordFor(x => x.WriterPassword, new { @class = "form-control", @id = "password1", @placeholder = "Please Enter Your Password!", @required = "" })
                             @Html.ValidationMessageFor(x => x.WriterPassword, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="exampleInputPassword2 mb-2">Parolanızı Tekrar Giriniz</label>
-                            <input type="password" name="PasswordAgain" class="form-control" id="password2" placeholder="Şifrenizi Tekrar Giriniz" required="" />
+                            <label for="exampleInputPassword2 mb-2">Re-enter your password</label>
+                            <input type="password" name="PasswordAgain" class="form-control" id="password2" placeholder="Re-enter your password" required="" />
                         </div>
                         @*<div class="form-group col-md-6">
                                 <label for="exampleInputPassword2 mb-2">Şifre Tekrar!</label>
@@ -43,12 +43,12 @@
                             </div>*@
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        @*<div class="form-group col-md-6">
                             <label for="exampleInputPassword2 mb-2">Görsel Dosya Yolu</label>
 
                             @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control", @id = "ValidationDefault03", @placeholder = "Lütfen Dosya Yolunu Giriniz!", @required = "" })
                             @Html.ValidationMessageFor(x => x.WriterImage, "", new { @class = "text-warning" })
-                        </div>
+                        </div>*@
                         @*<div class="form-group col-md-6">
                                 <label for="exampleInputPassword2 mb-2">Şehir</label>
                                 @Html.DropDownList("cities", (ViewBag.Cities), "Şehir Seçiniz", new { @class = "form-control dropdown" })
@@ -59,9 +59,9 @@
                             @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control" })
                             @Html.ValidationMessageFor(x => x.WriterImage, "", new { @class = "text-warning" })
                         </div>*@
-                    <button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
+                    <button type="submit" class="btn btn-primary submit mb-4">Register</button>
                     <p>
-                        <a href="#" id="btn1">Tüm şartları okudum, kabul ediyorum.</a>
+                        <a href="#" id="btn1">I have read and accept all terms and conditions.</a>
                     </p>
                 }
             </div>
@@ -70,7 +70,7 @@
     <br />
     <script>
         $('#btn1').click(function () {
-            swal("Site Kabul Şartları", "Sitemizde verdiğiniz mail adresi üzerinden bilgi ve haber e-postaları spam ölçüsüne varmadan gönderilmeye devam edilecektir. Eğer e-posta bülteninden çıkmak iterseniz mail ileti dizisini durdurabilirsiniz, şifre ve mail adresleriniz şifrelenmiş formatta herhangi bir kullanıcının görmeyeceği şekilde veri tabanlarımızda saklanmaktadır.");
+            swal("Site Acceptance Conditions", "Information and news e-mails will continue to be sent through the e-mail address you provide on our site, without reaching the spam level. If you want to unsubscribe from the e-mail newsletter, you can stop the e-mail thread, your passwords and e-mail addresses are stored in our databases in an encrypted format so that no user can see them.");
         });
     </script>
 </section>
