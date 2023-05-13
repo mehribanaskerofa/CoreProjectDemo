@@ -14,6 +14,7 @@ namespace DataAccessLayer.SqlServer.Context
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer("Data Source = SQL5110.site4now.net; Initial Catalog = db_a991f9_coredb; User Id = db_a991f9_coredb_admin; Password = admin123");
+            //builder.UseSqlServer("Server=USER-NUR ;Database=CoreDB;Integrated security=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

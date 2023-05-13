@@ -33,12 +33,12 @@ namespace CoreProjectDemo.Controllers
         {
             AppUser user = new AppUser()
             {
-                UserName=p.username
+                UserName = p.username
             };
-            var resul = await _userManager.CreateAsync(user, p.password);
+            //var resul = await _userManager.CreateAsync(user, p.password);
 
 
-            //var a=_userManager.PasswordHasher.HashPassword(null,p.password);
+            //var a = _userManager.PasswordHasher.HashPassword(null, p.password);
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);

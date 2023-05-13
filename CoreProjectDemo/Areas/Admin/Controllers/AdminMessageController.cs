@@ -48,42 +48,42 @@ namespace CoreProjectDemo.Areas.Admin.Controllers
                 return View(values);
             }
 
-        //[HttpGet]
-        //public IActionResult ComposeMessage()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult ComposeMessage(Message2 message)
-        //{
-        //    var username = User.Identity.Name;
-        //    var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-        //    var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-        //    message.SenderID = writerID;
-        //    message.ReceiverID = 2;
-        //    message.MessageDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-        //    message.MessageStatus = true;
-        //    mm.TAdd(message);
-        //    return RedirectToAction("SendBox");
-        //}
-
         [HttpGet]
         public IActionResult ComposeMessage()
         {
-            return View(Tuple.Create<Message2, AppUser>(new Message2(), new AppUser()));
+            return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> ComposeMessage([Bind(Prefix = "Item1")] Message2 message, [Bind(Prefix = "Item2")] AppUser writer)
+        public IActionResult ComposeMessage(Message2 message)
         {
-            var sender = await _userManager.FindByNameAsync(User.Identity.Name);
-            var receiver = await _userManager.FindByEmailAsync(writer.Email);
-            message.SenderID = sender.Id;
-            message.ReceiverID = receiver.Id;
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            message.SenderID = writerID;
+            message.ReceiverID = 2;
             message.MessageDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             message.MessageStatus = true;
             mm.TAdd(message);
-            return RedirectToAction("Sendbox");
+            return RedirectToAction("SendBox");
         }
+
+        //[HttpGet]
+        //public IActionResult ComposeMessage()
+        //{
+        //    return View(Tuple.Create<Message2, AppUser>(new Message2(), new AppUser()));
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> ComposeMessage([Bind(Prefix = "Item1")] Message2 message, [Bind(Prefix = "Item2")] AppUser writer)
+        //{
+        //    var sender = await _userManager.FindByNameAsync(User.Identity.Name);
+        //    var receiver = await _userManager.FindByEmailAsync(writer.Email);
+        //    message.SenderID = sender.Id;
+        //    message.ReceiverID = receiver.Id;
+        //    message.MessageDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+        //    message.MessageStatus = true;
+        //    mm.TAdd(message);
+        //    return RedirectToAction("Sendbox");
+        //}
     }
 }
