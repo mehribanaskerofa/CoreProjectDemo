@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using CoreProjectDemo.Models;
 using DataAccessLayer.SqlServer.Context;
 using DataAccessLayer.SqlServer.Repositories;
 using EntityLayer.Concrete;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace CoreProjectDemo.Controllers
 {
+    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager blogManager = new BlogManager(new EFBlogRepository());
@@ -55,7 +57,7 @@ namespace CoreProjectDemo.Controllers
                                                        Text = x.CategoryName,
                                                        Value = x.CategoryID.ToString()
                                                    }).ToList();
-            ViewBag.cv = categoryvalues;
+            ViewBag.category = categoryvalues;
         }
         [HttpGet]
         public IActionResult BlogAdd()
@@ -64,26 +66,35 @@ namespace CoreProjectDemo.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult BlogAdd(Blog blog, IFormFile image)
+        public IActionResult BlogAdd(BlogModel blogModel)//Blog blog, IFormFile image)
         {
             var username = User.Identity.Name;
             var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+       
+
+            Blog blog = new Blog()
+            {
+                BlogContent = blogModel.BlogContent,
+                BlogTitle=blogModel.BlogTitle       
+            };
+            
+            if (blogModel.BlogImage != null)
+            {
+                var extension = Path.GetExtension(blogModel.BlogImage.FileName);
+                var newimagename = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newimagename);
+                var stream = new FileStream(location, FileMode.Create);
+                blogModel.BlogImage.CopyTo(stream);
+                blog.BlogImage = newimagename;
+                blog.BlogThumbnailImage = newimagename;
+            }
+
+            //blog.BlogImage = "f7ef54a1-5bf5-4e5a-98ed-15ad4fec47a3.png";
+            //blog.BlogThumbnailImage = "f7ef54a1-5bf5-4e5a-98ed-15ad4fec47a3.png";
 
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(blog);
-            //if (image != null)
-            //{
-            //    var extension = Path.GetExtension(image.FileName);
-            //    var newimagename = Guid.NewGuid() + extension;
-            //    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newimagename);
-            //    var stream = new FileStream(location, FileMode.Create);
-            //    image.CopyTo(stream);
-            //    blog.BlogImage = newimagename;
-            //    blog.BlogThumbnailImage = newimagename;
-            //}
-            blog.BlogImage = "f7ef54a1-5bf5-4e5a-98ed-15ad4fec47a3.png";
-            blog.BlogThumbnailImage = "f7ef54a1-5bf5-4e5a-98ed-15ad4fec47a3.png";
             if (results.IsValid)
             {
                 blog.BlogStatus = true;
